@@ -32,7 +32,7 @@ You will learn:
 ** Энциклопедия профессора Фортрана page 14, 15, "Робот Фортран, чисть картошку!"
 """
 from typing import List
-
+...
 
 def fizzbuzz(n: int) -> List[str]:
     pass
