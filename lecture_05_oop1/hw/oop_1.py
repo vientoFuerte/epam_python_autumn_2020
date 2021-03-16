@@ -39,6 +39,39 @@ PEP8 соблюдать строго.
 """
 import datetime
 
+class Student:
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+        print('New student ', self.first_name, self.last_name)
+
+    def do_homework(self, homework):
+        self.homework = homework
+        if self.homework.is_active():
+            print('A student is doing the homework:', self.homework.text)
+            return self.homework
+        print('You are late')
+        return None
+
+class Teacher:
+    def __init__(self, first_name, last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+        print('New Teacher ', self.first_name, self.last_name)
+
+    def create_homework(self, text, days_amount):
+        print('the teacher created new homework:', text, days_amount)
+        return Homework(text, days_amount)
+
+class Homework:
+    def __init__(self, text, days_amount):
+        self.text = text
+        self.deadline = datetime.timedelta(days=days_amount)
+        self.created = datetime.datetime.now()
+    def is_active(self):
+        if datetime.datetime.now() - self.created < self.deadline:
+            return True
+        return False
 
 if __name__ == '__main__':
     teacher = Teacher('Daniil', 'Shadrin')
@@ -56,5 +89,9 @@ if __name__ == '__main__':
     oop_homework = create_homework_too('create 2 simple classes', 5)
     oop_homework.deadline  # 5 days, 0:00:00
 
+    not_expired_homework = teacher.create_homework('Learn salsa', 7)
+
     student.do_homework(oop_homework)
     student.do_homework(expired_homework)  # You are late
+
+    student.do_homework(not_expired_homework)
